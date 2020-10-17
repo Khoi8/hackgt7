@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #d6eb1f;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -38,7 +38,7 @@
 }
 
 .App .theList li:hover {
-  background-color: #73AD21;
+  background-color: #d2faff;
 }
 
 ul.theList{
@@ -59,9 +59,9 @@ ul.theList{
   font-size: 16px;
   margin: 10px;
   margin-right: 0px;
-  background: yellowgreen;
-  color: white;
-  border: 2px solid yellowgreen;
+  background: rgb(135, 245, 125);
+  color: black;
+  border: 2px solid rgb(135, 245, 125);
 }
 
 .App .header button:hover {

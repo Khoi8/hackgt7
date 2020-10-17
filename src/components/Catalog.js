@@ -10,7 +10,7 @@ export class Catalog extends Component {
     //Create a button for the current catalog item in the array
     createButton(name) {        
         return <Button onClick ={() => this.addItemButton(name)}  key={Math.random(1)}>
-                   {name}
+                    {name}
                 </Button>
     }
     

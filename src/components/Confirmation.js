@@ -38,7 +38,7 @@ export class Confirmation extends Component{
             <div className = 'header'>
                     <Box>
                         <br/>
-                        <h1>Is everything you want in your cart?</h1>                         
+                        <h1>Is everything you want in the locker</h1>                         
                     </Box>
                 
                     <Button 

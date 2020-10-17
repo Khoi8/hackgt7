@@ -23,6 +23,7 @@ export class ShopList extends Component {
             items:[],
             catalog: [],
             isLoaded: false,
+            lockers: new Array(6),
 
         }
         this.addItem = this.addItem.bind(this);
@@ -64,17 +65,22 @@ export class ShopList extends Component {
     //         })    
     // }
 
+    createLocker(e) {
+        
+        e.preventDefault();
+    }
+
     //add items from the input
     addItem(e) {
-        // const priceMap = new Map();
-        // var name;
-        // name = Object.keys(this.state.catalog).map((key) => [(key), this.state.catalog[key]]);
-        // var i;
+        const priceMap = new Map();
+        var name;
+        name = Object.keys(this.state.catalog).map((key) => [(key), this.state.catalog[key]]);
+        var i;
 
         //create map to check with catalog from backend to make sure not add the item that is not in the catalog
-        // for (i = 0; i < name.length; i++) {
-        //     priceMap.set(name[i][0], parseFloat(name[i][1]));
-        //     }
+        for (i = 0; i < name.length; i++) {
+            priceMap.set(name[i][0], parseFloat(name[i][1]));
+            }
         
         //create map to check with existing list to make sure no dupicate item on the list
         // var inputMap = new Map();
@@ -125,7 +131,7 @@ export class ShopList extends Component {
                         items: prevState.items.concat(newItem)
                     };
                 });
-            //}
+            // }
 
             //clear the temp values
             this._inputItem.value = "";
@@ -138,24 +144,24 @@ export class ShopList extends Component {
     deleteItem(key) {   
 
         //filter out the match item and return the filtered item
-        // var deleteItem = this.state.items.filter(function(item) {
-        //     return (item.key === key)
-        // });
+        var deleteItem = this.state.items.filter(function(item) {
+            return (item.key === key)
+        });
         
         //change the quantity to string for api request
-        // var sentQuantity = Object.values(deleteItem)[0].text[1].toString();
+        var sentQuantity = Object.values(deleteItem)[0].text[1].toString();
 
         //sent DELETE request to the api to remove the item that is remove on the frontend
-        // fetch(process.env.REACT_APP_BACKEND_API_URL + "/Items", {
-        //     method: "DELETE",
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify({
-        //         Name: Object.values(deleteItem)[0].text[0],
-        //         Quantity: sentQuantity
-        //     })
-        // })
+        fetch(process.env.REACT_APP_BACKEND_API_URL + "/Items", {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                Name: Object.values(deleteItem)[0].text[0],
+                Quantity: sentQuantity
+            })
+        })
         
         //filter out the match item and return the new list without that item
         var filteredItem = this.state.items.filter(function(item) {
@@ -193,7 +199,7 @@ export class ShopList extends Component {
         //make sure not adding duplicate item to the list
         if(inputMap.get(name)) {
             alert(name + " is already added to the list, you can change the quantitiy with + or - button")
-        }else {
+        } else {
 
             //sent POST request to the api
             fetch(process.env.REACT_APP_BACKEND_API_URL + "/Items", {
@@ -260,8 +266,8 @@ export class ShopList extends Component {
                     <ShopItems
                         catalog = {this.state.catalog}
                         items = {this.state.items}
-                        entries={this.state.items}
-                        delete={this.deleteItem}/>
+                        entries = {this.state.items}
+                        delete = {this.deleteItem}/>
                     </div>
                 )
             case 3:
@@ -281,9 +287,11 @@ export class ShopList extends Component {
                         />
                     </div>
                 )
-            default: 
+            default:
+                // return (
+                
+                // )
                 return (
-                    
                     <div className='itemListMain'>
                         <AppBar position="static">
                         <Toolbar variant="dense">
@@ -291,14 +299,14 @@ export class ShopList extends Component {
                             </IconButton>
                             <Container maxwidth= "sm">
                                 <Typography align="center" variant="h6" color="inherit">
-                                    Enter Item for ShopList
+                                    Enter Item for the FoodLocker
                                 </Typography>
                             </Container>
                         </Toolbar>                        
                         </AppBar>
                         <br/>
                         <div className='header'>
-                        <h1>click on item button or enter item's name and quantity to add
+                        <h1>Enter in the menu item name, and then the quantity desired
                         <Catalog
                             catalog = {this.state.catalog}
                             addItemButton = {this.addItemButton}

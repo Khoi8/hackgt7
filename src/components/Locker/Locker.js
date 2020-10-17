@@ -10,20 +10,16 @@ import { SettingsSystemDaydreamOutlined } from '@material-ui/icons';
 
 export class Locker extends Component {
 
-    //reset the state and back to the default page (shopList)
-    continue = e => {
-        //e.preventDefault();
-        // this.props.nextStep();
-    }
-
     goToDetails = e => {
         e.preventDefault();
         // go to details page
+        this.props.setStatePoint(0); // change the number based on the case for this
     }
 
     goToAddMenu = e => {
         e.preventDefault();
         // go to add items menu screen
+        this.props.setStatePoint(0); // change the number based on the case for this
     }
 
     isLockerEmpty(locker){

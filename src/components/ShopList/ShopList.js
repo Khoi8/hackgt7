@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
-import Confirmation from './Confirmation'
-import Checkout from './Checkout'
-import ShopItems from './ShopItems'
+import Confirmation from '../Confirmation/Confirmation'
+import Checkout from '../Checkout/Checkout'
+import ShopItems from '../ShopItems/ShopItems'
 import Button from '@material-ui/core/Button';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import AppBar from '@material-ui/core/AppBar';
 import Container from '@material-ui/core/Container';
-import PaymentMethod from './PaymentMethod';
-import ThankYou from './ThankYou';
-import Catalog from './Catalog';
+import PaymentMethod from '../PaymentMethod/PaymentMethod';
+import ThankYou from '../ThankYou/ThankYou';
+import Catalog from '../Catalog/Catalog';
+import Locker from '../Locker/Locker';
 
 export class ShopList extends Component {
 
@@ -23,7 +24,7 @@ export class ShopList extends Component {
             items:[],
             catalog: [],
             isLoaded: false,
-            lockers: new Array(6),
+            lockers: [[1,[]],[2,[]],[3,[]],[4,[]],[5,[]],[6,[]]],
 
         }
         this.addItem = this.addItem.bind(this);
@@ -234,6 +235,25 @@ export class ShopList extends Component {
         }
     }
 
+    addItemsToLock() {
+
+    }
+
+    // resetLockers() {
+    //     var i;
+    //     for (i = 0; i < this.lockers.length; i++) {
+    //         var defaultItem = {
+    //             text: null,
+    //             key: i
+    //         };
+    //         this.setState((prevState) => {
+    //             return{
+    //                 lockers: prevState.lockers.concat(defaultItem)
+    //             }
+    //         });
+    //     }
+    // }
+
     
 
 
@@ -288,61 +308,65 @@ export class ShopList extends Component {
                     </div>
                 )
             default:
-                // return (
-                
-                // )
-                return (
-                    <div className='itemListMain'>
-                        <AppBar position="static">
-                        <Toolbar variant="dense">
-                            <IconButton edge="start" color="inherit" aria-label="menu">
-                            </IconButton>
-                            <Container maxwidth= "sm">
-                                <Typography align="center" variant="h6" color="inherit">
-                                    Enter Item for the FoodLocker
-                                </Typography>
-                            </Container>
-                        </Toolbar>                        
-                        </AppBar>
-                        <br/>
-                        <div className='header'>
-                        <h1>Enter in the menu item name, and then the quantity desired
-                        <Catalog
-                            catalog = {this.state.catalog}
-                            addItemButton = {this.addItemButton}
+                 return (
+                    <div>
+                        <Locker
+                        lockerEnteries = {this.state.lockers}
                         />
-                        </h1>
-                            <form>
-                                <input  ref={(a) => this._inputItem = a}
-                                        placeholder='Enter Item'>
-                                </input>
-                                <br/>
-                                <br/>
-                                <input  ref={(b) => this._inputQuantity = b}
-                                        placeholder='Enter Quantity'>
-                                </input>
-                                <br/>
-                            </form>
-
-                            <Button
-                                variant="contained"
-                                color="primary" 
-                                onClick={this.addItem}> add
-                            </Button>
-        
-                            <Button 
-                                variant="contained"
-                                color="primary"
-                                onClick={this.continue}>Continue
-                            </Button>                       
                         </div>
-                        <ShopItems
-                            catalog = {this.state.catalog}
-                            items = {this.state.items}
-                            entries={this.state.items}
-                            delete={this.deleteItem}/>
-                    </div>
-            )
+                )
+                // return (
+                //     <div className='itemListMain'>
+                //         <AppBar position="static">
+                //         <Toolbar variant="dense">
+                //             <IconButton edge="start" color="inherit" aria-label="menu">
+                //             </IconButton>
+                //             <Container maxwidth= "sm">
+                //                 <Typography align="center" variant="h6" color="inherit">
+                //                     Enter Item for the FoodLocker
+                //                 </Typography>
+                //             </Container>
+                //         </Toolbar>                        
+                //         </AppBar>
+                //         <br/>
+                //         <div className='header'>
+                //         <h1>Enter in the menu item name, and then the quantity desired
+                //         <Catalog
+                //             catalog = {this.state.catalog}
+                //             addItemButton = {this.addItemButton}
+                //         />
+                //         </h1>
+                //             <form>
+                //                 <input  ref={(a) => this._inputItem = a}
+                //                         placeholder='Enter Item'>
+                //                 </input>
+                //                 <br/>
+                //                 <br/>
+                //                 <input  ref={(b) => this._inputQuantity = b}
+                //                         placeholder='Enter Quantity'>
+                //                 </input>
+                //                 <br/>
+                //             </form>
+
+                //             <Button
+                //                 variant="contained"
+                //                 color="primary" 
+                //                 onClick={this.addItem}> add
+                //             </Button>
+        
+                //             <Button 
+                //                 variant="contained"
+                //                 color="primary"
+                //                 onClick={this.continue}>Continue
+                //             </Button>                       
+                //         </div>
+                //         <ShopItems
+                //             catalog = {this.state.catalog}
+                //             items = {this.state.items}
+                //             entries={this.state.items}
+                //             delete={this.deleteItem}/>
+                    // </div>
+            
         }
     }
 }

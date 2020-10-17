@@ -26,45 +26,31 @@ export class Locker extends Component {
         // go to add items menu screen
     }
 
-    createLockers(locker) {
-        return <li key={locker.key} >
-                    <Button style = {{width: 300, height: 200, padding: 10, margin:100}}
-                        onClick = {() => {
+    isLockerEmpty(locker){
+        return !locker == null;
+    }
 
-                            var testOccupiedString = 'empty'; // pull in something from API
-
-                            if (testOccupiedString === 'empty') {
-                                // go to add items menu step
-                                this.goToAddMenu();
-                            } else if (testOccupiedString === 'Occupied') {
-                                // got to Details page
-                                this.goToDetails();
-                            }
-                        }}
-                    >
-                    Locker Number: {locker.text[0]} 
-                    <br/>
-                    Status: {locker.text[1]}
-                    <br/>
-                    Time Placed in locker: {Date.now()}
-                    <br/>
-                    </Button>
-                </li>
+    createLockers(i) {
+     return <Button  key={Math.random(1)}>
+                 Locker {i}
+            </Button>
     }
 
     
 
     render() {
         // this.itemsInLocker = this.props.items;
-        var lockerEntries = this.props.entries; 
+        var lockerEntries = this.props.lockerEnteries; 
         var lockerList = lockerEntries.map(this.createLockers);
         // returns a list of locker components
         // locker components will call the index from the locker[] in shoplist
         // to get the items stored inside them
+        console.log(lockerEntries);
         return (
+           
             <div>
 
-                <AppBar position="static">
+                <AppBar >
                         <Toolbar variant="dense">
                             <IconButton edge="start" color="inherit" aria-label="menu">
                             </IconButton>
@@ -75,10 +61,10 @@ export class Locker extends Component {
                             </Container>
                         </Toolbar>                        
                 </AppBar>
-                {/* unordered list of lockers */}
-                <li>
+                
+                
                     {lockerList}
-                </li>
+                
 
             </div>
         )

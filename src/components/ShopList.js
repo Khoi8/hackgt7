@@ -52,6 +52,12 @@ export class ShopList extends Component {
             step: step - 1
         });
     }
+
+    setStatePoint = (stepNumber) => {
+        this.setState({
+            step: stepNumber,
+        });
+    }
     
     //fetech the catalog items from the api
     // componentDidMount() {
@@ -66,7 +72,11 @@ export class ShopList extends Component {
     // }
 
     createLocker(e) {
-        
+        //create map with items and key
+        var newLocker = {
+            itemArrayIndex: 0,
+            key: Date.now()
+        };
         e.preventDefault();
     }
 

@@ -10,20 +10,16 @@ import { SettingsSystemDaydreamOutlined } from '@material-ui/icons';
 
 export class Locker extends Component {
 
-    //reset the state and back to the default page (shopList)
-    continue = e => {
-        //e.preventDefault();
-        // this.props.nextStep();
-    }
-
     goToDetails = e => {
         e.preventDefault();
         // go to details page
+        this.props.setStatePoint(0); // change the number based on the case for this
     }
 
     goToAddMenu = e => {
         e.preventDefault();
         // go to add items menu screen
+        this.props.setStatePoint(0); // change the number based on the case for this
     }
 
     createLockers(locker) {
@@ -42,8 +38,10 @@ export class Locker extends Component {
                             }
                         }}
                     >
-                    Locker Number: {locker.text[0]} 
+                    {/* This takes in input from new locket object in Shoplist */}
+                    Locker Number: {locker.key} 
                     <br/>
+                    {/*New object will have the status that will be updated*/}
                     Status: {locker.text[1]}
                     <br/>
                     Time Placed in locker: {Date.now()}

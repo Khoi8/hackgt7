@@ -53,58 +53,58 @@ export class ShopList extends Component {
     }
     
     //fetech the catalog items from the api
-    componentDidMount() {
-        fetch(process.env.REACT_APP_BACKEND_API_URL + "/Catalog")
-            .then(res => res.json())
-            .then(json => {
-                this.setState({
-                    isLoaded: true,
-                    catalog: json,
-                })
-            })    
-    }
+    // componentDidMount() {
+    //     fetch(process.env.REACT_APP_BACKEND_API_URL + "/Catalog")
+    //         .then(res => res.json())
+    //         .then(json => {
+    //             this.setState({
+    //                 isLoaded: true,
+    //                 catalog: json,
+    //             })
+    //         })    
+    // }
 
     //add items from the input
     addItem(e) {
-        const priceMap = new Map();
-        var name;
-        name = Object.keys(this.state.catalog).map((key) => [(key), this.state.catalog[key]]);
-        var i;
+        // const priceMap = new Map();
+        // var name;
+        // name = Object.keys(this.state.catalog).map((key) => [(key), this.state.catalog[key]]);
+        // var i;
 
         //create map to check with catalog from backend to make sure not add the item that is not in the catalog
-        for (i = 0; i < name.length; i++) {
-            priceMap.set(name[i][0], parseFloat(name[i][1]));
-            }
+        // for (i = 0; i < name.length; i++) {
+        //     priceMap.set(name[i][0], parseFloat(name[i][1]));
+        //     }
         
         //create map to check with existing list to make sure no dupicate item on the list
-        var inputMap = new Map();
-        if (this.state.items.length > 0) {
-            for (i = 0; i < this.state.items.length; i++) {
-                inputMap.set(this.state.items[i].text[0], this.state.items[i].text[1]);
-            }
-        }
+        // var inputMap = new Map();
+        // if (this.state.items.length > 0) {
+        //     for (i = 0; i < this.state.items.length; i++) {
+        //         inputMap.set(this.state.items[i].text[0], this.state.items[i].text[1]);
+        //     }
+        // }
         this._inputItem.value = this._inputItem.value.toLowerCase();
         if (this._inputItem.value !== "" && this._inputQuantity.value !== "") {
             //check with catalog from backend to make sure not add the item that is not in the catalog
-            if (!priceMap.get(this._inputItem.value)) {
-                alert(this._inputItem.value + " is not in the catalog");
+            // if (!priceMap.get(this._inputItem.value)) {
+            //     alert(this._inputItem.value + " is not in the catalog");
             
-            //check with existing list to make sure no dupicate item on the list
-            } else if(inputMap.get(this._inputItem.value)) {
-                alert(this._inputItem.value + " is already added to the list, you can change the quantitiy with + or - button")
-            }else {
+            // //check with existing list to make sure no dupicate item on the list
+            // } else if(inputMap.get(this._inputItem.value)) {
+            //     alert(this._inputItem.value + " is already added to the list, you can change the quantitiy with + or - button")
+            // }else {
                 
                 //POST the data to api
-                fetch(process.env.REACT_APP_BACKEND_API_URL + "/Items", {
-                    method: "POST",
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        Name: this._inputItem.value,
-                        Quantity: this._inputQuantity.value
-                    })
-                })
+                // fetch(process.env.REACT_APP_BACKEND_API_URL + "/Items", {
+                //     method: "POST",
+                //     headers: {
+                //         'Content-Type': 'application/json'
+                //     },
+                //     body: JSON.stringify({
+                //         Name: this._inputItem.value,
+                //         Quantity: this._inputQuantity.value
+                //     })
+                // })
 
                 //create items
                 var item = [
@@ -125,7 +125,7 @@ export class ShopList extends Component {
                         items: prevState.items.concat(newItem)
                     };
                 });
-            }
+            //}
 
             //clear the temp values
             this._inputItem.value = "";
@@ -138,24 +138,24 @@ export class ShopList extends Component {
     deleteItem(key) {   
 
         //filter out the match item and return the filtered item
-        var deleteItem = this.state.items.filter(function(item) {
-            return (item.key === key)
-        });
+        // var deleteItem = this.state.items.filter(function(item) {
+        //     return (item.key === key)
+        // });
         
         //change the quantity to string for api request
-        var sentQuantity = Object.values(deleteItem)[0].text[1].toString();
+        // var sentQuantity = Object.values(deleteItem)[0].text[1].toString();
 
         //sent DELETE request to the api to remove the item that is remove on the frontend
-        fetch(process.env.REACT_APP_BACKEND_API_URL + "/Items", {
-            method: "DELETE",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                Name: Object.values(deleteItem)[0].text[0],
-                Quantity: sentQuantity
-            })
-        })
+        // fetch(process.env.REACT_APP_BACKEND_API_URL + "/Items", {
+        //     method: "DELETE",
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify({
+        //         Name: Object.values(deleteItem)[0].text[0],
+        //         Quantity: sentQuantity
+        //     })
+        // })
         
         //filter out the match item and return the new list without that item
         var filteredItem = this.state.items.filter(function(item) {

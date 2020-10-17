@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import ItemForm from './components/ItemForm';
-
+import ShopList from './components/ShopList';
 function App() {
   return (
     <div className="App">
-      <ItemForm/>
+      {/* opens up ShopList function from ShopList.js  */}
+        <ShopList/>
     </div>
   );
 }

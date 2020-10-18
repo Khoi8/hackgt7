@@ -3,9 +3,9 @@ import {Redirect} from 'react-router-dom';
 import Button from "@material-ui/core/Button";
 import LandingPage from "../ContactInfo1/ContactInfo1.js";
 import StepperPage from "../Stepper/StepperPage.js";
+import api from "../data/api"
 
-// import "./Signup.css";
-
+// console.log(api.createOrder("2020-05-08T14:26:48Z", "Good-Morning"))
 class Signup extends Component {
     render() {
         return (
@@ -18,6 +18,7 @@ class Signup extends Component {
         //     Sign In!
         //   </Button>
         <Button variant = "contained" color = "primary" onClick={() => <StepperPage/>}>Login</Button>
+
         )
     }
 }

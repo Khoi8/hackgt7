@@ -24,7 +24,8 @@ export class ShopList extends Component {
             items:[],
             catalog: [],
             isLoaded: false,
-            lockers: [[1,[]],[2,[]],[3,[]],[4,[]],[5,[]],[6,[]]],
+            lockers: [[1," (unuse)",[]],[2," (unuse)",[]],[3," (unuse)",[]],[4," (unuse)",[]],[5," (unuse)",[]],[6," (unuse)",[]]],
+            lockerButtons:[[1, " (unuse)"],[2, " (unuse)"],[3, " (unuse)"],[4, " (unuse)"],[5, " (unuse)"],[6, " (unuse)"]]
 
         }
         this.addItem = this.addItem.bind(this);
@@ -36,6 +37,7 @@ export class ShopList extends Component {
     continue = e => {
         e.preventDefault();
         this.nextStep();
+       // this.addItemsToLocker()
     }
 
     //next step
@@ -72,14 +74,14 @@ export class ShopList extends Component {
     //         })    
     // }
 
-    createLocker(e) {
-        //create map with items and key
-        var newLocker = {
-            itemArrayIndex: 0,
-            key: Date.now()
-        };
-        e.preventDefault();
-    }
+    // createLocker(e) {
+    //     //create map with items and key
+    //     var newLocker = {
+    //         itemArrayIndex: 0,
+    //         key: Date.now()
+    //     };
+    //     e.preventDefault();
+    // }
 
     //add items from the input
     addItem(e) {
@@ -155,24 +157,24 @@ export class ShopList extends Component {
     deleteItem(key) {   
 
         //filter out the match item and return the filtered item
-        var deleteItem = this.state.items.filter(function(item) {
-            return (item.key === key)
-        });
+        // var deleteItem = this.state.items.filter(function(item) {
+        //     return (item.key === key)
+        // });
         
         //change the quantity to string for api request
-        var sentQuantity = Object.values(deleteItem)[0].text[1].toString();
+        //var sentQuantity = Object.values(deleteItem)[0].text[1].toString();
 
         //sent DELETE request to the api to remove the item that is remove on the frontend
-        fetch(process.env.REACT_APP_BACKEND_API_URL + "/Items", {
-            method: "DELETE",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                Name: Object.values(deleteItem)[0].text[0],
-                Quantity: sentQuantity
-            })
-        })
+        // fetch(process.env.REACT_APP_BACKEND_API_URL + "/Items", {
+        //     method: "DELETE",
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify({
+        //         Name: Object.values(deleteItem)[0].text[0],
+        //         Quantity: sentQuantity
+        //     })
+        // })
         
         //filter out the match item and return the new list without that item
         var filteredItem = this.state.items.filter(function(item) {
@@ -213,16 +215,16 @@ export class ShopList extends Component {
         } else {
 
             //sent POST request to the api
-            fetch(process.env.REACT_APP_BACKEND_API_URL + "/Items", {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    Name: name,
-                    Quantity: "0"
-                })
-            })
+            // fetch(process.env.REACT_APP_BACKEND_API_URL + "/Items", {
+            //     method: "POST",
+            //     headers: {
+            //         'Content-Type': 'application/json'
+            //     },
+            //     body: JSON.stringify({
+            //         Name: name,
+            //         Quantity: "0"
+            //     })
+            // })
 
             //create item with name on the button and quantitiy 0
             var item = [
@@ -245,8 +247,24 @@ export class ShopList extends Component {
         }
     }
 
-    addItemsToLock() {
-
+    addItemsToLocker() {
+        var i;
+        var locker = this.state.lockers;
+        var lockerButton = this.state.lockerButtons;
+        for (i = 0; i < locker.length; i++){
+            if (locker[i][2].length === 0 && this.state.items.length > 0) {
+                locker[i][2] = this.state.items;
+                locker[i][1] = " (used)";
+                lockerButton[i][1] = " (used)"
+                this.setState((prevState) => {
+                    return {
+                        lockers: locker,
+                        lockerButtons: lockerButton
+                    }
+                })
+            i = locker.length;
+            }
+        }
     }
 
     // resetLockers() {
@@ -269,22 +287,32 @@ export class ShopList extends Component {
 
     render() {
         const {step} = this.state;
+        console.log(this.state.lockers);
         switch(step) {
             case 1:
                 return (
-                    <div>
-                    <Confirmation
-                    nextStep = {this.nextStep}
-                    prevStep = {this.prevStep}
-                    />
-                    <ShopItems
-                        catalog = {this.state.catalog}
-                        items = {this.state.items}
-                        entries={this.state.items}
-                        delete={this.deleteItem}
-                    />
-                    </div>
+                        <div>
+                            <Locker
+                            prevStep = {this.prevStep}
+                            lockerEnteries = {this.state.lockers}
+                            lockerButtons = {this.state.lockerButtons}
+                            />
+                        </div>
                 )
+                // return (
+                //     <div>
+                //     <Confirmation
+                //     nextStep = {this.nextStep}
+                //     prevStep = {this.prevStep}
+                //     />
+                //     <ShopItems
+                //         catalog = {this.state.catalog}
+                //         items = {this.state.items}
+                //         entries={this.state.items}
+                //         delete={this.deleteItem}
+                //     />
+                //     </div>
+                // )
             case 2:
                 return (
                     <div>
@@ -318,65 +346,65 @@ export class ShopList extends Component {
                     </div>
                 )
             default:
-                 return (
-                    <div>
-                        <Locker
-                        lockerEnteries = {this.state.lockers}
-                        />
-                        </div>
-                )
                 // return (
-                //     <div className='itemListMain'>
-                //         <AppBar position="static">
-                //         <Toolbar variant="dense">
-                //             <IconButton edge="start" color="inherit" aria-label="menu">
-                //             </IconButton>
-                //             <Container maxwidth= "sm">
-                //                 <Typography align="center" variant="h6" color="inherit">
-                //                     Enter Item for the FoodLocker
-                //                 </Typography>
-                //             </Container>
-                //         </Toolbar>                        
-                //         </AppBar>
-                //         <br/>
-                //         <div className='header'>
-                //         <h1>Enter in the menu item name, and then the quantity desired
-                //         <Catalog
-                //             catalog = {this.state.catalog}
-                //             addItemButton = {this.addItemButton}
+                //     <div>
+                //         <Locker
+                //         lockerEnteries = {this.state.lockers}
                 //         />
-                //         </h1>
-                //             <form>
-                //                 <input  ref={(a) => this._inputItem = a}
-                //                         placeholder='Enter Item'>
-                //                 </input>
-                //                 <br/>
-                //                 <br/>
-                //                 <input  ref={(b) => this._inputQuantity = b}
-                //                         placeholder='Enter Quantity'>
-                //                 </input>
-                //                 <br/>
-                //             </form>
+                //     </div>
+                // )
+                return (    
+                    <div className='itemListMain'>
+                        <AppBar position="static">
+                        <Toolbar variant="dense">
+                            <IconButton edge="start" color="inherit" aria-label="menu">
+                            </IconButton>
+                            <Container maxwidth= "sm">
+                                <Typography align="center" variant="h6" color="inherit">
+                                    Enter Item for the FoodLocker
+                                </Typography>
+                            </Container>
+                        </Toolbar>                        
+                        </AppBar>
+                        <br/>
+                        <div className='header'>
+                        <h1>Enter in the menu item name, and then the quantity desired
+                        <Catalog
+                            catalog = {this.state.catalog}
+                            addItemButton = {this.addItemButton}
+                        />
+                        </h1>
+                            <form>
+                                <input  ref={(a) => this._inputItem = a}
+                                        placeholder='Enter Item'>
+                                </input>
+                                <br/>
+                                <br/>
+                                <input  ref={(b) => this._inputQuantity = b}
+                                        placeholder='Enter Quantity'>
+                                </input>
+                                <br/>
+                            </form>
 
-                //             <Button
-                //                 variant="contained"
-                //                 color="primary" 
-                //                 onClick={this.addItem}> add
-                //             </Button>
+                            <Button
+                                variant="contained"
+                                color="primary" 
+                                onClick={this.addItem}> add
+                            </Button>
         
-                //             <Button 
-                //                 variant="contained"
-                //                 color="primary"
-                //                 onClick={this.continue}>Continue
-                //             </Button>                       
-                //         </div>
-                //         <ShopItems
-                //             catalog = {this.state.catalog}
-                //             items = {this.state.items}
-                //             entries={this.state.items}
-                //             delete={this.deleteItem}/>
-                    // </div>
-            
+                            <Button 
+                                variant="contained"
+                                color="primary"
+                                onClick={this.continue}>Continue
+                            </Button>                       
+                        </div>
+                        <ShopItems
+                            catalog = {this.state.catalog}
+                            items = {this.state.items}
+                            entries={this.state.items}
+                            delete={this.deleteItem}/>
+                    </div>
+                )
         }
     }
 }

@@ -25,6 +25,10 @@ export class Locker extends Component {
     isLockerEmpty(locker){
         return !locker == null;
     }
+    back = e => {
+        e.preventDefault();
+        this.props.prevStep();
+    }
 
     createLockers(i) {
      return <Button  key={Math.random(1)}>
@@ -35,13 +39,15 @@ export class Locker extends Component {
     
 
     render() {
-        // this.itemsInLocker = this.props.items;
         var lockerEntries = this.props.lockerEnteries; 
-        var lockerList = lockerEntries.map(this.createLockers);
+        var lockerButton = this.props.lockerButtons;
+  
+        // this.itemsInLocker = this.props.items;
+        var lockerList = lockerButton.map(this.createLockers);
         // returns a list of locker components
         // locker components will call the index from the locker[] in shoplist
         // to get the items stored inside them
-        console.log(lockerEntries);
+        //console.log(lockerEntries);
         return (
            
             <div>
@@ -63,7 +69,10 @@ export class Locker extends Component {
                         {lockerList}
                     </ul>
                 </div>
-                
+                <Button 
+                        variant="contained"
+                        onClick={this.back}>Back
+                </Button> 
                 
 
             </div>

@@ -9,17 +9,21 @@ import Container from '@material-ui/core/Container';
 import { SettingsSystemDaydreamOutlined } from '@material-ui/icons';
 
 export class Locker extends Component {
+    constructor(props) {
+        super(props);
+        this.createLockers = this.createLockers.bind(this);
+    }
 
     goToDetails = e => {
-        e.preventDefault();
         // go to details page
-        this.props.setStatePoint(0); // change the number based on the case for this
+        this.props.setDetail() // change the number based on the case for this
+        e.preventDefault();
     }
 
     goToAddMenu = e => {
-        e.preventDefault();
         // go to add items menu screen
-        this.props.setStatePoint(0); // change the number based on the case for this
+        this.props.setAddItem() ; // change the number based on the case for this
+        e.preventDefault();
     }
 
     isLockerEmpty(locker){
@@ -36,8 +40,18 @@ export class Locker extends Component {
     }
 
     createLockers(i) {
-     return <Button  key={Math.random(1)}>
-                 Locker {i}
+     console.log(i);
+     console.log(typeof i[1]);
+     const check = (i[1] === 'unuse')
+     return !check?<Button  key={Math.random(1)}
+                onClick={this.goToAddMenu}
+             >
+                Locker {i}
+            </Button>
+            :<Button  key={Math.random(1)}
+                onClick={this.goToDetails}
+            >
+                Locker {i}
             </Button>
     }
 
@@ -52,7 +66,7 @@ export class Locker extends Component {
         // returns a list of locker components
         // locker components will call the index from the locker[] in shoplist
         // to get the items stored inside them
-        //console.log(lockerEntries);
+        console.log(lockerButton);
         return (
            
             <div>
@@ -63,7 +77,7 @@ export class Locker extends Component {
                             </IconButton>
                             <Container maxwidth= "sm">
                             <Typography align="center" variant="h6" color="inherit">
-                                Lockers
+                                Food Lockers
                             </Typography>
                             </Container>
                         </Toolbar>                        
@@ -73,16 +87,6 @@ export class Locker extends Component {
                     <ul className='theList'>
                         {lockerList}
                     </ul>
-                    <Button 
-                        variant="contained"
-                        color="primary"
-                        onClick={this.continue}
-                        >continue
-                    </Button>   
-                    <Button 
-                        variant="contained"
-                        onClick={this.back}>Back
-                    </Button> 
                 </div>
 
                 

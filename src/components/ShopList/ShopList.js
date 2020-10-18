@@ -56,9 +56,15 @@ export class ShopList extends Component {
         });
     }
 
-    setStatePoint = (stepNumber) => {
+    setDetail = () => {
         this.setState({
-            step: stepNumber,
+            step: 1
+        });
+    }
+
+    setAddItem = () => {
+        this.setState({
+            step: 2
         });
     }
     
@@ -290,6 +296,64 @@ export class ShopList extends Component {
         console.log(this.state.lockers);
         switch(step) {
             case 1:
+                return(
+                    <div>
+                        </div>
+                )
+            case 2:
+                    return (    
+                        <div className='itemListMain'>
+                            <AppBar
+                            //osition="static"
+                            >
+                            <Toolbar variant="dense">
+                                <Container maxwidth= "sm">
+                                    <Typography align="center" variant="h6" color="inherit">
+                                        Enter Item for the FoodLocker
+                                    </Typography>
+                                </Container>
+                            </Toolbar>                        
+                            </AppBar>
+                            <br/>
+                            <div className='header'>
+                            <h1>Enter in the menu item name, and then the quantity desired
+                            <Catalog
+                                catalog = {this.state.catalog}
+                                addItemButton = {this.addItemButton}
+                            />
+                            </h1>
+                                <form>
+                                    <input  ref={(a) => this._inputItem = a}
+                                            placeholder='Enter Item'>
+                                    </input>
+                                    <br/>
+                                    <br/>
+                                    <input  ref={(b) => this._inputQuantity = b}
+                                            placeholder='Enter Quantity'>
+                                    </input>
+                                    <br/>
+                                </form>
+    
+                                <Button
+                                    variant="contained"
+                                    color="primary" 
+                                    onClick={this.addItem}> add
+                                </Button>
+            
+                                <Button 
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={this.continue}>Continue
+                                </Button>                       
+                            </div>
+                            <ShopItems
+                                catalog = {this.state.catalog}
+                                items = {this.state.items}
+                                entries={this.state.items}
+                                delete={this.deleteItem}/>
+                        </div>
+                    )
+            case 3:
                 // return (
                 //         <div>
                 //             <Locker
@@ -313,7 +377,7 @@ export class ShopList extends Component {
                     />
                     </div>
                 )
-            case 2:
+            case 4:
                 return (
                     <div>
                     <Checkout
@@ -328,7 +392,7 @@ export class ShopList extends Component {
                         delete = {this.deleteItem}/>
                     </div>
                 )
-            case 3:
+            case 5:
                 return (
                     <div>
                         <PaymentMethod
@@ -337,10 +401,8 @@ export class ShopList extends Component {
                         />
                     </div>
                 )
-            case 4:
+            case 6:
                 return (
-                    
-
                 <div>
                     <Locker
                         prevStep = {this.prevStep}
@@ -350,7 +412,7 @@ export class ShopList extends Component {
                     />
                 </div>
                 )
-            case 5:
+            case 7:
                 return (
                     <div>
                         <ThankYou
@@ -359,65 +421,19 @@ export class ShopList extends Component {
                     </div>
                     )
             default:
-                // return (
-                //     <div>
-                //         <Locker
-                //         lockerEnteries = {this.state.lockers}
-                //         />
-                //     </div>
-                // )
-                return (    
-                    <div className='itemListMain'>
-                        <AppBar
-                        //osition="static"
-                        >
-                        <Toolbar variant="dense">
-                            <Container maxwidth= "sm">
-                                <Typography align="center" variant="h6" color="inherit">
-                                    Enter Item for the FoodLocker
-                                </Typography>
-                            </Container>
-                        </Toolbar>                        
-                        </AppBar>
-                        <br/>
-                        <div className='header'>
-                        <h1>Enter in the menu item name, and then the quantity desired
-                        <Catalog
-                            catalog = {this.state.catalog}
-                            addItemButton = {this.addItemButton}
+                return (
+                    <div>
+                        <Locker
+                            prevStep = {this.prevStep}
+                            lockerEnteries = {this.state.lockers}
+                            lockerButtons = {this.state.lockerButtons}
+                            nextStep = {this.nextStep}
+                            setDetail = {this.setDetail}
+                            setAddItem = {this.setAddItem}
                         />
-                        </h1>
-                            <form>
-                                <input  ref={(a) => this._inputItem = a}
-                                        placeholder='Enter Item'>
-                                </input>
-                                <br/>
-                                <br/>
-                                <input  ref={(b) => this._inputQuantity = b}
-                                        placeholder='Enter Quantity'>
-                                </input>
-                                <br/>
-                            </form>
-
-                            <Button
-                                variant="contained"
-                                color="primary" 
-                                onClick={this.addItem}> add
-                            </Button>
-        
-                            <Button 
-                                variant="contained"
-                                color="primary"
-                                onClick={this.continue}>Continue
-                            </Button>                       
-                        </div>
-                        <ShopItems
-                            catalog = {this.state.catalog}
-                            items = {this.state.items}
-                            entries={this.state.items}
-                            delete={this.deleteItem}/>
                     </div>
                 )
+                
         }
     }
 }

@@ -12,6 +12,7 @@ import PaymentMethod from '../PaymentMethod/PaymentMethod';
 import ThankYou from '../ThankYou/ThankYou';
 import Catalog from '../Catalog/Catalog';
 import Locker from '../Locker/Locker';
+import ItemsDetail from '../ItemsDetail/ItemsDetail'
 
 export class ShopList extends Component {
 
@@ -24,8 +25,8 @@ export class ShopList extends Component {
             items:[],
             catalog: [],
             isLoaded: false,
-            lockers: [[1," (unuse)",[]],[2," (unuse)",[]],[3," (unuse)",[]],[4," (unuse)",[]],[5," (unuse)",[]],[6," (unuse)",[]]],
-            lockerButtons:[[1, " (unuse)"],[2, " (unuse)"],[3, " (unuse)"],[4, " (unuse)"],[5, " (unuse)"],[6, " (unuse)"]]
+            lockers: [[1," (unuse)",[]],[2," (used)",[]],[3," (unuse)",[]],[4," (unuse)",[]],[5," (unuse)",[]],[6," (unuse)",[]]],
+            lockerButtons:[[1, " (unuse)"],[2, " (used)"],[3, " (unuse)"],[4, " (unuse)"],[5, " (unuse)"],[6, " (unuse)"]]
 
         }
         this.addItem = this.addItem.bind(this);
@@ -298,6 +299,9 @@ export class ShopList extends Component {
             case 1:
                 return(
                     <div>
+                        <ItemsDetail
+                         prevStep = {this.prevStep}
+                        />
                         </div>
                 )
             case 2:
@@ -344,7 +348,15 @@ export class ShopList extends Component {
                                     variant="contained"
                                     color="primary"
                                     onClick={this.continue}>Continue
-                                </Button>                       
+                                </Button>  
+
+                                <Button 
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={this.reset}>Back
+                                </Button>  
+
+                                                     
                             </div>
                             <ShopItems
                                 catalog = {this.state.catalog}

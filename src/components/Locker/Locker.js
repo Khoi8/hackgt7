@@ -40,19 +40,21 @@ export class Locker extends Component {
     }
 
     createLockers(i) {
-     console.log(i);
-     console.log(typeof i[1]);
-     const check = (i[1] === 'unuse')
-     return !check?<Button  key={Math.random(1)}
+     var check = (i[1] === ' (unuse)');
+     if (check){
+        return <Button  key={Math.random(1)}
                 onClick={this.goToAddMenu}
              >
                 Locker {i}
-            </Button>
-            :<Button  key={Math.random(1)}
-                onClick={this.goToDetails}
-            >
-                Locker {i}
-            </Button>
+                </Button>
+     }else{
+        return <Button  key={Math.random(1)}
+            onClick={this.goToDetails}
+                >
+                    Locker {i}
+                </Button>
+     }
+     
     }
 
     

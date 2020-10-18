@@ -119,7 +119,7 @@ export class ShopItems extends Component {
             <div className = 'header'>
 
                 {/*fix the price to 2 decimal place*/}
-                Total Price: ${total.toFixed(2)}
+                {/* Total Price: ${total.toFixed(2)} */}
                 
                 <ul className='theList'>
                     {listItems}

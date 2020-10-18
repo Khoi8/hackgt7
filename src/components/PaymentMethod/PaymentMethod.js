@@ -24,7 +24,7 @@ export class PaymentMethod extends Component {
     render() {
         return (
             <div>
-                <AppBar 
+                <AppBar style={{ backgroundColor: '#0e8a22' }}
                 //position="static"
                 >
                         <Toolbar variant="dense">

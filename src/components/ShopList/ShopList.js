@@ -302,7 +302,7 @@ export class ShopList extends Component {
             case 2:
                     return (    
                         <div className='itemListMain'>
-                            <AppBar
+                            <AppBar style={{ backgroundColor: '#0e8a22' }}
                             //osition="static"
                             >
                             <Toolbar variant="dense">

@@ -19,7 +19,7 @@ export class ThankYou extends Component {
     render() {
         return (
             <div>
-                <AppBar position="static">
+                <AppBar position="static" style={{ backgroundColor: '#0e8a22' }}>
                         <Toolbar variant="dense">
                             <IconButton edge="start" color="inherit" aria-label="menu">
                             </IconButton>

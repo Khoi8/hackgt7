@@ -111,7 +111,7 @@ export class Locker extends Component {
            
             <div>
 
-                <AppBar >
+                <AppBar style={{ backgroundColor: '#0e8a22' }}>
                         <Toolbar variant="dense">
                             <IconButton edge="start" color="inherit" aria-label="menu">
                             </IconButton>

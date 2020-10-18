@@ -22,14 +22,14 @@ function api() {
                     "comments": comments
                 })
             })
-            .then((result_as_json) => result_as_json.json());
-            return res;
+            const result_as_json = await res.json();
+            return result_as_json
         } catch(e) {
             console.log(e);
         }   
     })
-    
-    console.log(createOrder("2020-05-08T14:26:48Z", "Good-Morning"));
+    let data = createOrder("2020-05-08T14:26:48Z", "Good-Morning");
+    console.log(data);
 
 }
 export default api();

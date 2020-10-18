@@ -25,10 +25,11 @@ export class Locker extends Component {
         console.log(index);
     }
 
-    goToAddMenu = e => {
+    
+    goToAddMenu (index) {
         // go to add items menu screen
-        this.props.setAddItem() ; // change the number based on the case for this
-        e.preventDefault();
+        this.props.setAddItem(); // change the number based on the case for this
+     
     }
 
     isLockerEmpty(locker){
@@ -54,8 +55,8 @@ export class Locker extends Component {
                         <br/>
                         <Button
                                 variant="contained"
-                                onClick={() => this.goToAddMenu} 
-                                > add Item
+                                onClick={() => this.goToAddMenu(i[0])} 
+                                > add Items
                         </Button>
                     </li>
         }else {

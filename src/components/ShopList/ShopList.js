@@ -25,8 +25,8 @@ export class ShopList extends Component {
             items:[],
             catalog: [],
             isLoaded: false,
-            lockers: [[0," (unuse)",[]],[1," (used)",[]],[2," (unuse)",[]],[3," (unuse)",[]],[4," (unuse)",[]],[5," (unuse)",[]]],
-            lockerButtons:[[0, " (unuse)"],[1, " (used)"],[2, " (unuse)"],[3, " (unuse)"],[4, " (unuse)"],[5, " (unuse)"]],
+            lockers: [[0," (unuse)",[]],[1," (unuse)",[[]]],[2," (unuse)",[]],[3," (unuse)",[]],[4," (unuse)",[]],[5," (unuse)",[]]],
+            lockerButtons:[[0, " (unuse)"],[1, " (unuse)"],[2, " (unuse)"],[3, " (unuse)"],[4, " (unuse)"],[5, " (unuse)"]],
             lockerindex:0
 
         }

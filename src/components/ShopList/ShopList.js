@@ -31,9 +31,10 @@ export class ShopList extends Component {
 
         }
         this.addItem = this.addItem.bind(this);
-        this.deleteItem = this.deleteItem.bind(this);
+        this.deleteItem = this.deleteItem.bind(this);   
         this.addItemButton = this.addItemButton.bind(this);
         this.lockerIndex = this.lockerIndex.bind(this);
+        this.addItemsToLocker = this.addItemsToLocker.bind(this);
     }
 
     //step + 1
@@ -358,15 +359,6 @@ export class ShopList extends Component {
                         </div>
                     )
             case 3:
-                // return (
-                //         <div>
-                //             <Locker
-                //             prevStep = {this.prevStep}
-                //             lockerEnteries = {this.state.lockers}
-                //             lockerButtons = {this.state.lockerButtons}
-                //             />
-                //         </div>
-                // )
                 return (
                     <div>
                     <Confirmation
@@ -407,17 +399,6 @@ export class ShopList extends Component {
                     </div>
                 )
             case 6:
-                return (
-                <div>
-                    <Locker
-                        prevStep = {this.prevStep}
-                        lockerEnteries = {this.state.lockers}
-                        lockerButtons = {this.state.lockerButtons}
-                        nextStep = {this.nextStep}
-                    />
-                </div>
-                )
-            case 7:
                 return (
                     <div>
                         <ThankYou

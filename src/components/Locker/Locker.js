@@ -14,10 +14,15 @@ export class Locker extends Component {
         this.createLockers = this.createLockers.bind(this);
     }
 
-    goToDetails = e => {
+    lockerindex(index) {
+        this.props.lockerIndex(index);
+    }
+
+    goToDetails (index){
         // go to details page
         this.props.setDetail(); // change the number based on the case for this
-        e.preventDefault();
+        this.lockerindex(index);
+        console.log(index);
     }
 
     goToAddMenu = e => {
@@ -39,25 +44,55 @@ export class Locker extends Component {
         this.props.nextStep();
     }
 
-    createLockers(i) {
-     var check = (i[1] === ' (unuse)');
-     if (check){
-        return <Button  key={i[0]}
-                id = {i[0]}
-                onClick={this.goToAddMenu}
-             >
-                Locker {i}
-                </Button>
-     }else{
-        return <Button  key={i[0]}
-            id = {i[0]}
-            onClick={this.goToDetails}
-                >
-                    Locker {i}
-                </Button>
-     }
-     
+    createLockers(i){
+        var check = (i[1] === ' (unuse)');
+        if (check) {
+            return <li key={i[0]} >
+                        Locker: {i[0]} 
+                        <br/>
+                        Status: {i[1]}
+                        <br/>
+                        <Button
+                                variant="contained"
+                                onClick={() => this.goToAddMenu} 
+                                > add Item
+                        </Button>
+                    </li>
+        }else {
+            return <li key = {i[0]}>
+                        Locker: {i[0]} 
+                        <br/>
+                        Status: {i[1]}
+                        <br/>
+                        <Button
+                                variant="contained"
+                                onClick={() => this.goToDetails(i[0])} 
+                                > details
+                        </Button>
+                </li>
+        }
+    
     }
+
+    // createLockers(i) {
+    //  var check = (i[1] === ' (unuse)');
+    //  if (check){
+    //     return <Button  key={i[0]}
+    //             id = {i[0]}
+    //             onClick={this.goToAddMenu}
+    //          >
+    //             Locker {i}
+    //             </Button>
+    //  }else{
+    //     return <Button  key={i[0]}
+    //         id = {i[0]}
+    //         onClick={this.goToDetails(i[0])}
+    //             >
+    //                 Locker {i}
+    //             </Button>
+    //  }
+     
+    // }
 
     
 

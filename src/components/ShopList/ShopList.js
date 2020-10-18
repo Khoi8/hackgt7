@@ -33,6 +33,7 @@ export class ShopList extends Component {
         this.addItem = this.addItem.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
         this.addItemButton = this.addItemButton.bind(this);
+        this.lockerIndex = this.lockerIndex.bind(this);
     }
 
     //step + 1

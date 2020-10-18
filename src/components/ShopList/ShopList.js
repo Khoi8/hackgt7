@@ -25,7 +25,7 @@ export class ShopList extends Component {
             items:[],
             catalog: [],
             isLoaded: false,
-            lockers: [[0," (unuse)",[]],[1," (unuse)",[[]]],[2," (unuse)",[]],[3," (unuse)",[]],[4," (unuse)",[]],[5," (unuse)",[]]],
+            lockers: [[0," (unuse)",[]],[1," (unuse)",[]],[2," (unuse)",[]],[3," (unuse)",[]],[4," (unuse)",[]],[5," (unuse)",[]]],
             lockerButtons:[[0, " (unuse)"],[1, " (unuse)"],[2, " (unuse)"],[3, " (unuse)"],[4, " (unuse)"],[5, " (unuse)"]],
             lockerindex:0
 
@@ -293,7 +293,9 @@ export class ShopList extends Component {
                 return(
                     <div>
                         <ItemsDetail
-                         prevStep = {this.prevStep}
+                            lockerindex = {this.state.lockerindex}
+                            lockers = {this.state.lockers}
+                            prevStep = {this.prevStep}
                         />
                         </div>
                 )

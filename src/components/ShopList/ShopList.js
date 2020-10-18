@@ -290,29 +290,29 @@ export class ShopList extends Component {
         console.log(this.state.lockers);
         switch(step) {
             case 1:
-                return (
-                        <div>
-                            <Locker
-                            prevStep = {this.prevStep}
-                            lockerEnteries = {this.state.lockers}
-                            lockerButtons = {this.state.lockerButtons}
-                            />
-                        </div>
-                )
                 // return (
-                //     <div>
-                //     <Confirmation
-                //     nextStep = {this.nextStep}
-                //     prevStep = {this.prevStep}
-                //     />
-                //     <ShopItems
-                //         catalog = {this.state.catalog}
-                //         items = {this.state.items}
-                //         entries={this.state.items}
-                //         delete={this.deleteItem}
-                //     />
-                //     </div>
+                //         <div>
+                //             <Locker
+                //             prevStep = {this.prevStep}
+                //             lockerEnteries = {this.state.lockers}
+                //             lockerButtons = {this.state.lockerButtons}
+                //             />
+                //         </div>
                 // )
+                return (
+                    <div>
+                    <Confirmation
+                    nextStep = {this.nextStep}
+                    prevStep = {this.prevStep}
+                    />
+                    <ShopItems
+                        catalog = {this.state.catalog}
+                        items = {this.state.items}
+                        entries={this.state.items}
+                        delete={this.deleteItem}
+                    />
+                    </div>
+                )
             case 2:
                 return (
                     <div>
@@ -339,12 +339,25 @@ export class ShopList extends Component {
                 )
             case 4:
                 return (
+                    
+
+                <div>
+                    <Locker
+                        prevStep = {this.prevStep}
+                        lockerEnteries = {this.state.lockers}
+                        lockerButtons = {this.state.lockerButtons}
+                        nextStep = {this.nextStep}
+                    />
+                </div>
+                )
+            case 5:
+                return (
                     <div>
                         <ThankYou
                         nextStep = {this.reset}
                         />
                     </div>
-                )
+                    )
             default:
                 // return (
                 //     <div>
@@ -355,10 +368,10 @@ export class ShopList extends Component {
                 // )
                 return (    
                     <div className='itemListMain'>
-                        <AppBar position="static">
+                        <AppBar
+                        //osition="static"
+                        >
                         <Toolbar variant="dense">
-                            <IconButton edge="start" color="inherit" aria-label="menu">
-                            </IconButton>
                             <Container maxwidth= "sm">
                                 <Typography align="center" variant="h6" color="inherit">
                                     Enter Item for the FoodLocker

@@ -24,7 +24,9 @@ export class Confirmation extends Component{
     render() {
         return (
             <div>
-                    <AppBar position="static">
+                    <AppBar 
+                    //position="static"
+                    >
                         <Toolbar variant="dense">
                             <IconButton edge="start" color="inherit" aria-label="menu">
                             </IconButton>

@@ -30,6 +30,11 @@ export class Locker extends Component {
         this.props.prevStep();
     }
 
+    continue = e => {
+        e.preventDefault();
+        this.props.nextStep();
+    }
+
     createLockers(i) {
      return <Button  key={Math.random(1)}>
                  Locker {i}
@@ -68,11 +73,18 @@ export class Locker extends Component {
                     <ul className='theList'>
                         {lockerList}
                     </ul>
-                </div>
-                <Button 
+                    <Button 
+                        variant="contained"
+                        color="primary"
+                        onClick={this.continue}
+                        >continue
+                    </Button>   
+                    <Button 
                         variant="contained"
                         onClick={this.back}>Back
-                </Button> 
+                    </Button> 
+                </div>
+
                 
 
             </div>

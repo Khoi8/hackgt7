@@ -23,10 +23,10 @@ export class PaymentMethod extends Component {
     render() {
         return (
             <div>
-                <AppBar position="static">
+                <AppBar 
+                //position="static"
+                >
                         <Toolbar variant="dense">
-                            <IconButton edge="start" color="inherit" aria-label="menu">
-                            </IconButton>
                             <Container maxwidth= "sm">
                             <Typography align="center" variant="h6" color="inherit">
                                 Payment Method

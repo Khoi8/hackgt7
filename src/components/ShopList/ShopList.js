@@ -25,8 +25,9 @@ export class ShopList extends Component {
             items:[],
             catalog: [],
             isLoaded: false,
-            lockers: [[1," (unuse)",[]],[2," (used)",[]],[3," (unuse)",[]],[4," (unuse)",[]],[5," (unuse)",[]],[6," (unuse)",[]]],
-            lockerButtons:[[1, " (unuse)"],[2, " (used)"],[3, " (unuse)"],[4, " (unuse)"],[5, " (unuse)"],[6, " (unuse)"]]
+            lockers: [[0," (unuse)",[]],[1," (used)",[]],[2," (unuse)",[]],[3," (unuse)",[]],[4," (unuse)",[]],[5," (unuse)",[]]],
+            lockerButtons:[[0, " (unuse)"],[1, " (used)"],[2, " (unuse)"],[3, " (unuse)"],[4, " (unuse)"],[5, " (unuse)"]],
+            lockerindex:0
 
         }
         this.addItem = this.addItem.bind(this);
@@ -202,6 +203,11 @@ export class ShopList extends Component {
         });
     }
 
+    lockerIndex(index) {
+        this.setState({
+            lockerindex: index
+        })
+    }
 
     //add function for the catalog item button
     addItemButton(name) {
@@ -273,21 +279,6 @@ export class ShopList extends Component {
             }
         }
     }
-
-    // resetLockers() {
-    //     var i;
-    //     for (i = 0; i < this.lockers.length; i++) {
-    //         var defaultItem = {
-    //             text: null,
-    //             key: i
-    //         };
-    //         this.setState((prevState) => {
-    //             return{
-    //                 lockers: prevState.lockers.concat(defaultItem)
-    //             }
-    //         });
-    //     }
-    // }
 
     
 
@@ -410,6 +401,7 @@ export class ShopList extends Component {
                         <PaymentMethod
                         nextStep = {this.nextStep}
                         prevStep = {this.prevStep}
+                        addItemsToLocker = {this.addItemsToLocker}
                         />
                     </div>
                 )
@@ -442,6 +434,8 @@ export class ShopList extends Component {
                             nextStep = {this.nextStep}
                             setDetail = {this.setDetail}
                             setAddItem = {this.setAddItem}
+                            lockerIndex = {this.lockerIndex}
+                            
                         />
                     </div>
                 )

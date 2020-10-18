@@ -11,6 +11,7 @@ export class PaymentMethod extends Component {
     //step + 1
     continue = e => {
         e.preventDefault();
+        this.props.addItemsToLocker();
         this.props.nextStep();
     }
 

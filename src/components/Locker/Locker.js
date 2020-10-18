@@ -16,7 +16,7 @@ export class Locker extends Component {
 
     goToDetails = e => {
         // go to details page
-        this.props.setDetail() // change the number based on the case for this
+        this.props.setDetail(); // change the number based on the case for this
         e.preventDefault();
     }
 
@@ -42,13 +42,15 @@ export class Locker extends Component {
     createLockers(i) {
      var check = (i[1] === ' (unuse)');
      if (check){
-        return <Button  key={Math.random(1)}
+        return <Button  key={i[0]}
+                id = {i[0]}
                 onClick={this.goToAddMenu}
              >
                 Locker {i}
                 </Button>
      }else{
-        return <Button  key={Math.random(1)}
+        return <Button  key={i[0]}
+            id = {i[0]}
             onClick={this.goToDetails}
                 >
                     Locker {i}

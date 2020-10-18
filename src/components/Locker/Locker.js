@@ -57,9 +57,13 @@ export class Locker extends Component {
                             </Container>
                         </Toolbar>                        
                 </AppBar>
+                <div className = 'header'>
+
+                    <ul className='theList'>
+                        {lockerList}
+                    </ul>
+                </div>
                 
-                
-                    {lockerList}
                 
 
             </div>
